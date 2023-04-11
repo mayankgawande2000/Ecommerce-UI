@@ -9,6 +9,14 @@ import { ShowProductDetailsComponent } from './shared/components/show-product-de
 import { ProductResolverService } from './shared/service/product-resolver.service';
 import { AuthGuard } from './shared/_auth/auth.guard';
 import { UserDashboardComponent } from './user/components/user-dashboard/user-dashboard.component';
+import { ProductViewDetailsComponent } from './shared/components/product-view-details/product-view-details.component';
+import { BuyProductComponent } from './shared/components/buy-product/buy-product.component';
+import { BuyProductResolverService } from './shared/service/buy-product-resolver.service';
+import { OrderConfirmationComponent } from './shared/components/order-confirmation/order-confirmation.component';
+import { RegisterComponent } from './shared/components/register/register.component';
+import { CartComponent } from './shared/components/cart/cart.component';
+import { MyOrdersComponent } from './shared/components/my-orders/my-orders.component';
+import { OrderDetailsComponent } from './shared/components/order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -42,6 +50,50 @@ const routes: Routes = [
     path: 'showProductDetails', component: ShowProductDetailsComponent,
     canActivate:[AuthGuard],
     data:{roles:['Admin']}
+  },
+  {
+    path: 'productViewDetails',
+    component:ProductViewDetailsComponent,
+    resolve:{
+      product:ProductResolverService
+    }
+  },
+  {
+    path:'buyProduct',
+    component: BuyProductComponent,
+    canActivate:[AuthGuard],
+    data:{roles:['User']},
+    resolve:{
+      productDetails: BuyProductResolverService
+    }
+
+  },
+  {
+    path:'orderConfirm',
+    component: OrderConfirmationComponent,
+    canActivate:[AuthGuard],
+    data:{roles:['User']},
+  },
+  {
+    path:'cart',
+    component: CartComponent,
+    canActivate:[AuthGuard],
+    data:{roles:['User']},
+  },
+  {
+    path:'myOrders',
+    component: MyOrdersComponent,
+    canActivate:[AuthGuard],
+    data:{roles:['User']},
+  },
+  {
+    path: 'orderInformation', component: OrderDetailsComponent,
+    canActivate:[AuthGuard],
+    data:{roles:['Admin']}
+  },
+  {
+    path:'register',
+    component: RegisterComponent,
   }
 ];
 

@@ -26,7 +26,7 @@ export class AddNewProductComponent implements OnInit{
     private activatedRoute: ActivatedRoute){}
 
     ngOnInit(){
-      console.log(this.activatedRoute.snapshot.data);
+  
        this.product = this.activatedRoute.snapshot.data['product'];
      if(this.product && this.product.productId){
       this.isNewProduct=false;

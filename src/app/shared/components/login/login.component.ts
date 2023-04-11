@@ -27,9 +27,13 @@ export class LoginComponent {
         }
       },
       error:(error)=>{
-        console.log(error);
+
       }
     });     
+  }
+
+  registerUser(){
+    this.router.navigate(['/register']);
   }
 
 }

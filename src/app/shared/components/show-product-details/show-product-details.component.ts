@@ -15,7 +15,11 @@ import { ShowProductImagesComponent } from '../show-product-images/show-product-
 })
 export class ShowProductDetailsComponent implements OnInit{
    productDetails: Product[]=[];
-  displayedColumns: string[] = ['Id', 'Product Name', 'Product Description', 'Product Discounter price','Product Actual price','Images', 'Edit', 'Delete'];
+   pageNumber: number = 0;
+   showTable: boolean = false;
+   showLoadMoreBtn: boolean = false;
+  
+  displayedColumns: string[] = ['Id', 'Product Name', 'description', 'Product Discounter price','Product Actual price','Actions'];
   constructor(private productService: ProductService, 
     private imagePro:ImageProcessingService,
     public dialog: MatDialog,
@@ -25,15 +29,24 @@ export class ShowProductDetailsComponent implements OnInit{
   this.getAllProducts();
   }
 
-  public getAllProducts(){
-    this.productService.getAllProducts().pipe(
+  public getAllProducts(searchKey: string =""){
+    this.showTable =false;
+    this.productService.getAllProducts(this.pageNumber, searchKey).pipe(
       map((x:Product[],i:number) => x.map((product: Product)=> this.imagePro.createImages(product)))
     ).subscribe({
       next:(response)=>{
-         this.productDetails = response;
+         response.forEach((p)=>this.productDetails.push(p));
+        //  this.productDetails = response;
+        this.showTable=true;
+        if(response.length === 12){
+          this.showLoadMoreBtn = true;
+        }
+        else{
+          this.showLoadMoreBtn = false;
+        }
       },
       error:(err)=>{
-        console.log(err);
+
       }
     })
   }
@@ -46,7 +59,7 @@ export class ShowProductDetailsComponent implements OnInit{
 
       },
       error:(err: HttpErrorResponse)=>{
-   console.log(err);
+
       }
       
   })
@@ -64,5 +77,14 @@ export class ShowProductDetailsComponent implements OnInit{
 
   editProductDetails(id:number){
     this.router.navigate(['/addNewProduct',{productid:id}]);
+  }
+  loadMoreProduct(){
+    this.pageNumber++;
+    this.getAllProducts();
+  }
+  searchByKeyword(searchKeyword: string){
+    this.pageNumber = 0;
+    this.productDetails = [];
+    this.getAllProducts(searchKeyword);
   }
 }

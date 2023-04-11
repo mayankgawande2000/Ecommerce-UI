@@ -19,6 +19,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ShowProductDetailsComponent } from './components/show-product-details/show-product-details.component';
 import { ShowProductImagesComponent } from './components/show-product-images/show-product-images.component';
+import { ProductViewDetailsComponent } from './components/product-view-details/product-view-details.component';
+import { BuyProductComponent } from './components/buy-product/buy-product.component';
+import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CartComponent } from './components/cart/cart.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -28,7 +36,14 @@ import { ShowProductImagesComponent } from './components/show-product-images/sho
     AddNewProductComponent,
     DragDirective,
     ShowProductDetailsComponent,
-    ShowProductImagesComponent
+    ShowProductImagesComponent,
+    ProductViewDetailsComponent,
+    BuyProductComponent,
+    OrderConfirmationComponent,
+    RegisterComponent,
+    CartComponent,
+    MyOrdersComponent,
+    OrderDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +56,8 @@ import { ShowProductImagesComponent } from './components/show-product-images/sho
     MatGridListModule,
     MatTableModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonToggleModule
   ],
   exports:[
     HomeComponent,

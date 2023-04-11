@@ -15,11 +15,11 @@ export class UserDashboardComponent implements OnInit{
   forUser(){
     this.userService.forUser().subscribe({
       next:(response)=>{
-        console.log(response);
+  
         this.message = response;
       },
       error:(err)=>{
-        console.log(err);
+
       }
     })
   }
